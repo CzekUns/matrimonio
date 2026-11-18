@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f2ed">
+  <meta name="description" content="Un luogo privato per condividere i ricordi del matrimonio.">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <title>I nostri ricordi · Social privato</title>
+</head>
+<body>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <main id="welcome" class="welcome">
+    <div class="welcome-art" aria-hidden="true"><div class="monogram">♥</div><span>IL NOSTRO GIORNO</span></div>
+    <section class="welcome-panel">
+      <p class="eyebrow">UN RICORDO CONDIVISO</p>
+      <h1>Ogni momento,<br><em>insieme.</em></h1>
+      <p class="intro">Un piccolo spazio privato per custodire i momenti più belli di questa giornata.</p>
+      <form id="invite-form" class="stack">
+        <label for="invite-code">Il tuo codice personale</label>
+        <input id="invite-code" name="invite" placeholder="Es. ABCD-1234" autocomplete="one-time-code" required maxlength="64">
+        <button class="primary" type="submit">Entra nel matrimonio <span aria-hidden="true">→</span></button>
+      </form>
+      <button id="demo-enter" class="text-button" type="button">Esplora la demo senza un codice</button>
+      <p id="welcome-status" class="hint">Gli accessi reali saranno attivati dagli organizzatori.</p>
+    </section>
+  </main>
+
+  <div id="app" class="app" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="brand-symbol">♥</span><div><strong>I nostri ricordi</strong><small>IL NOSTRO GIORNO</small></div></div>
+      <button id="notifications-button" class="icon-button" type="button" aria-label="Vai agli avvisi">♧<span id="notif-dot" class="dot"></span></button>
+    </header>
+    <div id="demo-banner" class="demo-banner" hidden>ANTEPRIMA · I contenuti non sono salvati online</div>
+    <section id="feed-view" class="view">
+      <div class="heading"><p class="eyebrow">IL NOSTRO ALBUM</p><h2>La giornata <em>vista da voi.</em></h2><p>Scatti, video e voci di chi è qui con noi.</p></div>
+      <div class="composer" id="composer-open"><span class="composer-icon">+</span><span>Condividi un momento</span><span aria-hidden="true">→</span></div>
+      <div class="section-line"><h3>Ultimi ricordi</h3><span>Dal più recente</span></div>
+      <div id="feed-list" class="feed-list" aria-live="polite"></div>
+    </section>
+    <section id="capture-view" class="view" hidden>
+      <div class="heading"><p class="eyebrow">CREA UN RICORDO</p><h2>Fermiamo <em>l'attimo.</em></h2><p>Scatta una foto o registra fino a 60 secondi.</p></div>
+      <div class="camera-panel">
+        <div class="camera-top"><span id="camera-status">Fotocamera da avviare</span><span id="record-timer" hidden>00:00 / 01:00</span></div>
+        <video id="camera-preview" autoplay playsinline muted hidden></video>
+        <div id="camera-placeholder" class="camera-placeholder"><span class="camera-glyph">◎</span><p>La fotocamera si avvia<br>solo quando lo scegli tu</p></div>
+        <button id="camera-start" class="camera-activate" type="button">Attiva fotocamera</button>
+        <button id="camera-flip" class="flip" type="button" aria-label="Cambia fotocamera" hidden>↺</button>
+      </div>
+      <div class="capture-modes" role="group" aria-label="Tipo di ricordo">
+        <button class="mode active" data-mode="photo" type="button">Foto</button>
+        <button class="mode" data-mode="video" type="button">Video · 60s</button>
+        <button class="mode" data-mode="audio" type="button">Audio</button>
+      </div>
+      <button id="capture-button" class="capture-button" type="button" disabled aria-label="Scatta foto"><span></span></button>
+      <p id="capture-help" class="hint center">Niente caricamenti dalla galleria: i ricordi nascono qui.</p>
+    </section>
+    <section id="alerts-view" class="view" hidden>
+      <div class="heading"><p class="eyebrow">DAGLI ORGANIZZATORI</p><h2>Le notizie <em>del giorno.</em></h2><p>Indicazioni e messaggi importanti per gli invitati.</p></div>
+      <div id="alerts-list"></div>
+      <div id="admin-panel" class="admin-panel" hidden>
+        <h3>Invia un avviso</h3>
+        <form id="alert-form"><label for="alert-text">Messaggio</label><textarea id="alert-text" rows="3" maxlength="500" required placeholder="Es. Ci vediamo tutti per la foto di gruppo!"></textarea><button class="primary" type="submit">Pubblica avviso</button></form>
+        <p class="hint">Le notifiche push richiedono una configurazione successiva.</p>
+      </div>
+    </section>
+    <section id="profile-view" class="view" hidden>
+      <div class="heading"><p class="eyebrow">IL TUO SPAZIO</p><h2>Ciao, <em id="profile-name">invitato.</em></h2><p>Grazie per essere parte di questa giornata.</p></div>
+      <div class="profile-card"><div class="profile-avatar">♥</div><div><strong id="profile-role">Invitato</strong><p>Accesso riservato al matrimonio</p></div></div>
+      <button id="demo-admin" class="outline-button" type="button" hidden>Passa alla vista organizzatori (demo)</button>
+      <button id="demo-guest" class="outline-button" type="button" hidden>Torna alla vista invitato (demo)</button>
+      <button id="logout" class="outline-button" type="button">Esci</button>
+      <p class="hint">Privacy: gli originali saranno archiviati su Google Drive. Non condividere il tuo QR personale.</p>
+    </section>
+    <nav class="bottom-nav" aria-label="Navigazione principale">
+      <button class="nav-item active" data-view="feed" type="button"><span>▦</span><small>Feed</small></button>
+      <button class="nav-item" data-view="capture" type="button"><span>◎</span><small>Scatta</small></button>
+      <button class="nav-item" data-view="alerts" type="button"><span>♧</span><small>Avvisi</small></button>
+      <button class="nav-item" data-view="profile" type="button"><span>○</span><small>Profilo</small></button>
+    </nav>
+  </div>
+
+  <dialog id="review-dialog" class="review-dialog">
+    <form method="dialog"><button class="dialog-close" value="cancel" aria-label="Chiudi">×</button></form>
+    <p class="eyebrow">IL TUO RICORDO</p><h2>Prima di pubblicare</h2>
+    <div id="review-media" class="review-media"></div>
+    <label for="post-caption">Aggiungi una dedica (facoltativa)</label>
+    <textarea id="post-caption" rows="2" maxlength="280" placeholder="Un momento da ricordare..."></textarea>
+    <div class="dialog-actions"><button id="review-retake" class="outline-button" type="button">Rifai</button><button id="review-publish" class="primary" type="button">Pubblica</button></div>
+    <p id="review-note" class="hint"></p>
+  </dialog>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

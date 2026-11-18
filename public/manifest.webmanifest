@@ -1,0 +1,18 @@
+{
+  "name": "I nostri ricordi · Matrimonio",
+  "short_name": "Ricordi",
+  "description": "Social privato degli invitati al matrimonio",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f2ed",
+  "theme_color": "#f6f2ed",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
