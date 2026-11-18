@@ -20,8 +20,14 @@ Data baseline: 18 novembre 2026. Repo: CzekUns/matrimonio. Branch principale: ma
 | Notifiche push | NON implementate |
 | Simulazione 200 invitati | NON eseguita |
 
+## CI baseline verificata — 18 novembre 2026
+GitHub Actions ha completato con esito SUCCESS il workflow di controllo sintattico e test mock API:
+https://github.com/CzekUns/matrimonio/actions/runs/44411942244
+
+Copertura eseguita: sintassi del frontend, worker e script generatore; smoke test health, database mancante, riscatto QR monouso e permessi guest (DB simulato). Non equivale a test di deploy reale, Google Drive, Wistia o smartphone.
+
 ## Prossima azione
-Verificare sintassi/build JS e deploy HTTPS della demo; iniziare issue #1 e #4. Il sistema non è pronto per un evento reale.
+Pubblicare demo HTTPS su Vercel oppure static assets Cloudflare; iniziare issue #1 e #4. Il sistema non è pronto per un evento reale.
 
 ## Come aggiungere checkpoint
 Per ogni modifica lasciare data, SHA/PR, elenco file, test eseguiti davvero, risultato, dubbi e dipendenza successiva. Vietato convertire un mock o un codice non eseguito in un risultato dichiarato completato.
